@@ -1,0 +1,28 @@
+name: Deploy Backend to Elastic Beanstalk
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v3
+
+    - name: Criar pacote .zip
+      run: zip -r deploy.zip . -x "*.git*" "node_modules/*"
+
+    - name: Deploy no Elastic Beanstalk
+      uses: einaregilsson/beanstalk-deploy@v22
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: reserva-salas-api
+        environment_name: Reserva-salas-api-env
+        version_label: "deploy-${{ github.sha }}"
+        region: us-east-2
+        deployment_package: deploy.zip
