@@ -14,7 +14,17 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Criar pacote .zip
-      run: zip -r deploy.zip . -x "*.git*" "node_modules/*"
+      run: |
+        zip -r deploy.zip \
+          Dockerfile \
+          package.json \
+          package-lock.json \
+          prisma \
+          src \
+          tsconfig.json \
+          -x "*.git*" \
+          -x "node_modules/*" \
+          -x ".env"
 
     - name: Deploy no Elastic Beanstalk
       uses: einaregilsson/beanstalk-deploy@v22
