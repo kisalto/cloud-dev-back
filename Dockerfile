@@ -12,6 +12,10 @@ COPY . .
 RUN npx prisma generate
 RUN npm run build
 
+RUN echo "=== CONTEUDO DE /app ===" && ls -la /app
+RUN echo "=== CONTEUDO DE /app/dist ===" && ls -la /app/dist
+RUN test -f /app/dist/server.js
+
 EXPOSE 8080
 
-CMD ["node", "dist/server.js"]
+CMD ["node", "/app/dist/server.js"]
