@@ -33,7 +33,7 @@ jobs:
         aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         application_name: reserva-salas-api
-        environment_name: reserva-salas-api-env-v2
+        environment_name: reserva-salas-api-env
         version_label: "deploy-${{ github.sha }}"
         region: us-east-2
         deployment_package: deploy.zip
