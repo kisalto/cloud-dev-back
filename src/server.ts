@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 // Configuração da Porta (MUITO IMPORTANTE PARA A AWS)
 // A AWS injeta a porta automaticamente através do process.env.PORT (geralmente 8080).
 // O "|| 3000" serve para quando você for rodar localmente na sua máquina.
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
