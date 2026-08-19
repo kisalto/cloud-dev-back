@@ -19,22 +19,7 @@ const prisma = new PrismaClient({
   adapter,
 });
 
-// Configuração explícita do CORS
-const corsOptions = {
-  origin: [
-    'http://reserva-salas-front.s3-website.us-east-2.amazonaws.com', // Seu frontend no S3
-    'http://localhost:5173', // Vite local (para você testar na sua máquina)
-    'http://localhost:3000'
-  ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
-};
-
-app.use(cors(corsOptions));
-
-// É uma boa prática adicionar o middleware de OPTIONS
-app.options('*', cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
