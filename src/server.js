@@ -13,6 +13,7 @@ const connectionString = process.env.DATABASE_URL || "postgresql://admin:adminpa
 const pool = new Pool({ connectionString });
 const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
+const PORT = Number(process.env.PORT) || 8080;
 app.use(express.json());
 // --- UNIDADE ---
 app.post('/unidades', async (req, res) => {
@@ -105,7 +106,7 @@ app.delete('/reservas/:id', async (req, res) => {
     await prisma.reserva.delete({ where: { id: Number(req.params.id) } });
     res.status(204).send();
 });
-app.listen(3000, () => {
-    console.log('Servidor rodando na porta 3000');
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
 });
 //# sourceMappingURL=server.js.map
